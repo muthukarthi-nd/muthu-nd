@@ -4,7 +4,7 @@ require('dotenv').config();
 const connectDB =async () =>{
     console.log('MongoDB URI:' ,process.env.MONGO_URI);
     try{
-        await mongoose.connect(process.env.MONGO_URI|| 'mongodb://localhost:27017/todoapp' ,{
+        await mongoose.connect(process.env.MONGO_URI|| 'mongodb://localhost:27017/bank' ,{
             useNewUrlParser:true,
             useUnifiedTopology:true,
         });console.log('MongoDB Connected');
