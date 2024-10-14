@@ -2,11 +2,11 @@ const mongoose=require('mongoose');
 require('dotenv').config();
 
 const connectDB =async () =>{
-    console.log('MongoDB URI:' ,process.env.MONGO_URI);
+    console.log('MongoDB URI:' ,process.env.MONGODB_URI);
     try{
-        await mongoose.connect(process.env.MONGO_URI|| 'mongodb://localhost:27017/bank' ,{
-            useNewUrlParser:true,
-            useUnifiedTopology:true,
+        await mongoose.connect(process.env.MONGODB_URI,{
+            useNewUrlParser:false,
+            useUnifiedTopology:false,
         });console.log('MongoDB Connected');
 
     }

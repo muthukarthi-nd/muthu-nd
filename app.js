@@ -3,12 +3,21 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const bodyParser = require('body-parser');
 var connectDB=require('./config/db');
-const transRoutes = require('./routes/tranroute');
-var usersRouter = require('./routes/users');
-
+var dataRoute=require('./route/transRoute');
+var usersRouter = require('./route/userRoute');
 var app = express();
 connectDB();
+
+// Middleware
+app.use(bodyParser.json());
+
+
+// route
+app.use('/api', dataRoute);
+app.use('/users', usersRouter);
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -20,9 +29,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// routes
-app.use('/users', usersRouter);
-app.use('/api', transRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -40,11 +46,9 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-
-const PORT =process.env.PORT ;
-app.listen(PORT ,()=>{
-  console.log('server connected');
-})
-
+const PORT=process.env.PORT;
+app.listen(PORT,()=>{
+console.log('server connected port 5000')
+});
 
 module.exports = app;
